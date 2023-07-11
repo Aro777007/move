@@ -30,8 +30,18 @@ public:
         cout << "move constructor" << endl;
     }
 
+    matrix& operator = (const matrix& obj)
+    {
+        if (this != &obj)
+        {
+            this->n = obj.n;
+            this->m = obj.m;
+            this->array = obj.array;
+        }
+        cout << "move operator assignment"<< endl;
+        return*this;
+    }
 
-    
 
     void init(int** array, int n, int m)
     {
@@ -92,9 +102,12 @@ int main()
         array[i] = new int[m];
     }
 
+
     matrix obj;
     matrix matrixobj1(obj);
     matrix obj1 = std::move(obj);
+    matrix obj2;
+    obj2 = std::move(obj);
     obj.init(array, n, m);
     obj.swap(array, n, m);
     obj.print(array, n, m);
