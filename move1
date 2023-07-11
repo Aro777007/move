@@ -16,7 +16,7 @@ public:
         arr = new int[size];
     }
 
-    // Copy Constructor
+    
     arrayy(const arrayy& obj) {
         size = obj.size;
         arr = new int[size];
@@ -25,7 +25,7 @@ public:
         }
     }
 
-    // Move Constructor
+    
     arrayy(arrayy&& obj) {
         size = obj.size;
         arr = obj.arr;
@@ -34,7 +34,7 @@ public:
         cout << "move constructor" << endl;
     }
 
-    // Move Assignment Operator
+    
     arrayy& operator=(arrayy&& obj){
         if (this != &obj) {
             delete[] arr;
