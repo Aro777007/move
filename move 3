@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+
+class matrix
+{
+    int n = 0;
+    int m = 0;
+    int** array = nullptr;
+public:
+
+    matrix() {};
+
+
+    matrix(const matrix& obj)
+    {
+        this->n;
+        this->m;
+        this->array;
+        int** array = new int* [n];
+    }
+
+    matrix(matrix&& obj)
+    {
+        this->n = obj.n;
+        this->m = obj.m;
+        this->array = obj.array;
+        obj.n = 0;
+        obj.m = 0;
+        obj.array = 0;
+        cout << "move constructor" << endl;
+    }
+
+
+    
+
+    void init(int** array, int n, int m)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; ++j)
+            {
+                array[i][j] = i;
+            }
+        }
+    }
+
+    ~matrix() {};
+
+
+    void swap(int** array, int n, int m)
+    {
+        int i = 0;
+        for (; i < n; ++i)
+        {
+            for (; i < m; ++i)
+            {
+                int* temp = new int(1);
+                *temp = array[0][i];
+                array[0][i] = array[2][i];
+                array[2][i] = *temp;
+            }
+        }
+    }
+
+    void print(int** array, int n, int m)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                cout << array[i][j];
+            }
+            cout << endl;
+        }
+    }
+
+
+};
+
+
+
+int main()
+{
+
+    int n;
+    int m;
+    cin >> n;
+    cin >> m;
+    int** array = new int* [n];
+    for (int i = 0; i < m; ++i)
+    {
+        array[i] = new int[m];
+    }
+
+    matrix obj;
+    matrix matrixobj1(obj);
+    matrix obj1 = std::move(obj);
+    obj.init(array, n, m);
+    obj.swap(array, n, m);
+    obj.print(array, n, m);
+}
