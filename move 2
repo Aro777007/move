@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+
+class animal
+{
+private:
+     int height;
+
+public:
+    animal(int& h) : height(h) {}
+
+    animal(animal&& obj) : height(obj.height)
+    {
+        obj.height = 0;
+
+        cout << "animal move constructor" << endl;
+    }
+
+    animal(){}
+   
+    void f()
+    {
+        cout << height << endl;
+    }
+};
+
+class mammal : public animal
+{
+private:
+    int legs;
+
+public:
+
+    mammal(int& h, int l) : animal(h), legs(l) {}
+
+    mammal(mammal&& obj) : legs(obj.legs)
+    {
+        obj.legs = 0;
+
+        cout << "mammal move constructor" << endl;
+    }
+
+    mammal(){}
+
+    void f1()
+    {
+        cout << legs << endl;
+    }
+};
+
+class lion : public mammal
+{
+private:
+     int teeth;
+
+public:
+    lion(int& h, int l, int t) : mammal(h, l), teeth(t) {}
+
+    lion(lion&& obj) : teeth(obj.teeth)
+    {
+        obj.teeth = 0;
+        cout << "lion move constructor" << endl;
+    }
+
+    void f2()
+    {
+        cout << teeth << endl;
+    }
+};
+
+int main()
+{
+    int height = 300;
+    int legs = 4;
+    int teeth = 34;
+
+    animal animalObj(height);
+    animalObj.f();
+    animal animalOBJ = std::move(animalOBJ);
+
+    mammal mammalObj(height, legs);
+    mammalObj.f1();
+    mammal mammalOBJ = std::move(mammalOBJ);
+
+
+    lion lionObj(height, legs, teeth);
+    lionObj.f2();
+    lion lionObj1 = std::move(lionObj);
+
+}
